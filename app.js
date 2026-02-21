@@ -26,7 +26,7 @@ function levelUP(){
   user_seq = [];
   level++;
   para.innerText = `LEVEL - ${level}`;
-  let n = Math.floor(Math.random() * 3);
+  let n = Math.floor(Math.random() * 4);
   blink(color_btn[n]);
   game_seq.push(color_btn[n].id);
 }
