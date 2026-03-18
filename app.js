@@ -47,7 +47,7 @@ function check_seq(idx){
   else{
     para.innerText = `GAME OVER!! Your Score is: ${level-1} Press any key to restart..`;
     document.querySelector("body").style.backgroundColor = "red";
-    setInterval(function(){
+    setTimeout(function(){
       document.querySelector("body").style.backgroundColor = "#0d1117";
     },200);
     restart();
@@ -67,6 +67,7 @@ for(btn of color_btn){
 
 function restart(){
   if(level-1 > highest_score){
+    highest_score = level - 1;
     high.innerHTML = `Highest Score: ${level-1}`;
   }
   game_seq = [];
