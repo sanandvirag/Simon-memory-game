@@ -6,6 +6,7 @@ let game_seq = [];
 let user_seq = [];
 let level = 0;
 let started = false;
+let acceptingInput = false;
 let highest_score = 0;
 
 document.addEventListener("keypress" , function(){
@@ -29,6 +30,7 @@ function levelUP(){
   let n = Math.floor(Math.random() * 4);
   blink(color_btn[n]);
   game_seq.push(color_btn[n].id);
+  acceptingInput = true;
 }
 
 function glow(btn){
@@ -41,6 +43,7 @@ function glow(btn){
 function check_seq(idx){
   if(user_seq[idx] === game_seq[idx]){
     if(game_seq.length == user_seq.length){
+      acceptingInput = false;
       setTimeout(levelUP , 1000);
     }
   }
@@ -54,14 +57,14 @@ function check_seq(idx){
   }
 }
 function btn_pressed(){
-  if(game_seq.length >= 1){
+  if(game_seq.length >= 1 && acceptingInput && user_seq.length < game_seq.length){
     let btn = this;
     glow(btn);
     user_seq.push(btn.id);
     check_seq(user_seq.length - 1);
   }
 }
-for(btn of color_btn){
+for(let btn of color_btn){
   btn.addEventListener("click" , btn_pressed);
 }
 
@@ -74,6 +77,7 @@ function restart(){
   user_seq = [];
   level = 0;
   started = false;
+  acceptingInput = false;
 }
 
 
